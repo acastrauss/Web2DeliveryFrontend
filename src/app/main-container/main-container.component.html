@@ -1,8 +1,14 @@
-<!-- <div *ngIf="userSigned; then thenBlock else elseBlock"></div>
+<div *ngIf="userSigned; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>
-  <app-dashboard></app-dashboard>
+  <!-- <a routerLink="/dashboard" routerLinkActive="active" ariaCurrentWhenActive="page">Dashboard</a> -->
+  <!-- <button (click)="RouteDashboard()">Dashboard</button> -->
+  <!-- <app-dashboard></app-dashboard> -->
+</ng-template>
+<br/>
+<ng-template #elseBlock>
+  <!-- <a routerLink="/forms" routerLinkActive="active" ariaCurrentWhenActive="page">Forms</a> -->
+  <!-- <app-forms-container></app-forms-container> -->
+  <!-- <button (click)="RouteLoginForms()">Login/Register</button> -->
 </ng-template>
 
-<ng-template #elseBlock>
-  <app-forms-container></app-forms-container>
-</ng-template> -->
+

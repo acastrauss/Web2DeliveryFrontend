@@ -5,8 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuard implements CanActivate, CanActivateChild, CanLoad {
-  // Can User activate
+export class LoginFormsGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -24,6 +23,6 @@ export class LoginGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   CanRoute(): boolean{
-    return sessionStorage.getItem("token") != null;
+    return sessionStorage.getItem("token") == null;
   }
 }
