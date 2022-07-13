@@ -22,8 +22,7 @@ export class LoginFormComponent implements OnInit {
     private router : Router
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     const plainPass: string = this.LoginForm.get("Password")?.value;
@@ -31,10 +30,11 @@ export class LoginFormComponent implements OnInit {
     body["Password"] = CryptoJS.SHA256(plainPass).toString();
 
     this._formsService.Login(body).subscribe(
-      (user: IUser) => { // 200 OK
+      (user: any) => { // 200 OK
         alert("Logged in");
-        sessionStorage.setItem("token", "token");
-        this.router.navigate(['/dashboard']);
+        sessionStorage.setItem("token", user.token);
+        sessionStorage.setItem("user", JSON.stringify(user));
+        this.router.navigate(["/dashboard"]);
     },
     (error: any) => {
       this.LoginForm.reset();

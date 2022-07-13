@@ -19,6 +19,7 @@ export interface IUser {
   Address: string;
   Picture: Byte[];
   UType: UserType;
+  token: string;
 }
 
 export enum ApprovalStatus
@@ -39,6 +40,7 @@ export class Deliverer implements IUser {
   public Address: string = "";
   public Picture: Array<Byte> = [];
   public readonly UType: UserType = UserType.DELIVERER;
+  public token: string = "";
 
   public Purchases: Array<Purchase> = [];
   public CurrentDelivery: Purchase = new Purchase();
@@ -56,6 +58,7 @@ export class Purchaser implements IUser{
   public Address: string = "";
   public Picture: Array<Byte> = [];
   public readonly UType: UserType = UserType.CONSUMER;
+  public token: string = "";
 
   public CurrentDelivery: Purchase = new Purchase();
   public PreviousPurchases: Array<Purchase> = [];
@@ -72,6 +75,7 @@ export class Admin implements IUser{
   public Address: string = "";
   public Picture: Array<Byte> = [];
   public readonly UType: UserType = UserType.ADMIN;
+  public token: string = "";
 
   public Deliverers: Array<Deliverer> = [];
   public Products: Array<Product> = [];

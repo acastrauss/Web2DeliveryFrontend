@@ -57,16 +57,16 @@ export class RegisterFormComponent implements OnInit {
     const plainPass: string = this.RegisterForm.get("Password")?.value;
     let body = {...this.RegisterForm.value};
     body["Password"] = CryptoJS.SHA256(plainPass).toString();
-    this._formsService.Register(body).subscribe((user: IUser) => {
-      this.RegisterForm.reset();
-      if(user){
+    this._formsService.Register(body).subscribe(
+      (user: any) => {
+        this.RegisterForm.reset();
         alert("Registered");
         this.router.navigate(['/loginform']);
-      }
-      else {
-        alert("error");
-      }
-    });
+    },
+    (error: any) => {
+      alert("error");
+    }
+    );
   }
 
   SamePasswords():boolean{

@@ -12,6 +12,7 @@ export class FormsService {
 
   private RegisterURL: string = BaseURL + "Iusers"
   private LoginURL: string = BaseURL + "Iusers/LoginUser"
+  private CreateProductURL: string = BaseURL + "Products"
 
   constructor(
     private http: HttpClient
@@ -37,6 +38,19 @@ export class FormsService {
     return this.http.post<IUser>(
       this.LoginURL,
       user,
+      {
+        headers : h
+      }
+    );
+  }
+
+  CreateProduct(product: any){
+    var h = new HttpHeaders();
+    h.append("Content-Type", "application/json");
+
+    return this.http.post<IUser>(
+      this.CreateProductURL,
+      product,
       {
         headers : h
       }

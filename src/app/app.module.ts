@@ -13,6 +13,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminViewComponent } from './admin-view/admin-view.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
+import { AdminNavigationComponent } from './admin-navigation/admin-navigation.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { DeliverersTableComponent } from './deliverers-table/deliverers-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { DelivererNavigationComponent } from './deliverer-navigation/deliverer-navigation.component';
+import { PurchaserNavigationComponent } from './purchaser-navigation/purchaser-navigation.component';
+import { DelivererViewComponent } from './deliverer-view/deliverer-view.component';
+import { PurchaserViewComponent } from './purchaser-view/purchaser-view.component';
+import { ProductFormComponent } from './product-form/product-form.component';
+import { AdminPurchasesComponent } from './admin-purchases/admin-purchases.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +42,16 @@ import { HttpClientModule } from '@angular/common/http';
     FormsContainerComponent,
     DashboardComponent,
     LoginFormComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    AdminViewComponent,
+    AdminNavigationComponent,
+    DeliverersTableComponent,
+    DelivererNavigationComponent,
+    PurchaserNavigationComponent,
+    DelivererViewComponent,
+    PurchaserViewComponent,
+    ProductFormComponent,
+    AdminPurchasesComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +60,19 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

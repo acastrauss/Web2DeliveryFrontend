@@ -1,0 +1,28 @@
+<form class="example-form" [formGroup]="ProductForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" type="text" formControlName="Name">
+  </mat-form-field>
+  <br/>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Price</mat-label>
+    <input matInput placeholder="Price" type="number" min="0" formControlName="Price">
+  </mat-form-field>
+  <br/>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Ingredients</mat-label>
+    <!-- <input matInput placeholder="Ingredients" type="tex" formControlName="Ingredients"> -->
+    <textarea matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            placeholder="Ingredients" formControlName="Ingredients"
+            ></textarea>
+  </mat-form-field>
+  <br/>
+
+  <button mat-raised-button color="accent" type="submit" [disabled]="!ProductForm.valid">Save</button>
+</form>

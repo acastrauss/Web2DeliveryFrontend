@@ -13,7 +13,10 @@ export class MainContainerComponent implements OnInit {
   constructor(private router : Router) { }
 
   ngOnInit(): void {
-    if(sessionStorage.getItem("token") != null){
+    if(
+      sessionStorage.getItem("token") != null && sessionStorage.getItem("user") != null &&
+      sessionStorage.getItem("token") != undefined && sessionStorage.getItem("user") != undefined
+    ){
       this.router.navigate(['/dashboard']);
     }
     else {

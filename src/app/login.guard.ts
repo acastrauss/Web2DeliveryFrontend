@@ -24,6 +24,6 @@ export class LoginGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   CanRoute(): boolean{
-    return sessionStorage.getItem("token") != null;
+    return sessionStorage.getItem("token") != null && sessionStorage.getItem("token") != undefined;
   }
 }
