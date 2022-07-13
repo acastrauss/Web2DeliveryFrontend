@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Deliverer } from '../models/user.model';
 import { BaseURL } from './config';
@@ -9,6 +9,7 @@ import { BaseURL } from './config';
 export class UsersService {
 
   private DeliverersURL: string = BaseURL + "Deliverers";
+  private UsersURL: string = BaseURL + "Iusers";
 
   constructor(
     private http: HttpClient
@@ -26,5 +27,13 @@ export class UsersService {
         id:id, status:status, adminId: adminId
       }
     )
+  }
+
+  public GetById(id:number){
+    let p = new HttpParams();
+    p = p.append("id", id);
+    return this.http.get(this.UsersURL, {
+      params:p
+    });
   }
 }

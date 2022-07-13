@@ -8,9 +8,11 @@ export enum PurhaseStatus
   CANCELED = 3
 }
 
+export const DELIVERY_PRICE = 250.0;
+
 export class Purchase {
   public PurchaseItems: Array<Product> = [];
-  public DeliveryPrice: number = 250.0;
+  public DeliveryPrice: number = DELIVERY_PRICE;
   public TotalPrice: number = this.DeliveryPrice;
   public Comment: string = "";
   public Address: string = "";

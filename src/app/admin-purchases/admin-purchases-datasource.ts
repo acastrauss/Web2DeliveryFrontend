@@ -4,17 +4,16 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { Product } from '../models/product.model';
-import { PurhaseStatus } from '../models/purchase.model';
+import { DELIVERY_PRICE, PurhaseStatus } from '../models/purchase.model';
 
 // TODO: Replace this with your own data model type
 export class AdminPurchasesItem {
-  public PurchaseItems: Array<Product> = [];
-  public DeliveryPrice: number = 250.0;
-  public TotalPrice: number = this.DeliveryPrice;
-  public Comment: string = "";
-  public Address: string = "";
-  public Id: number = -1;
-  public Status: PurhaseStatus = PurhaseStatus.ORDERED;
+  public totalPrice: number = DELIVERY_PRICE;
+  public comment: string = "";
+  public address: string = "";
+  public id: number = -1;
+  public status: string = "";
+  public products: Product[] = [];
 }
 
 // TODO: replace this with real data from your application
@@ -83,8 +82,8 @@ export class AdminPurchasesDataSource extends DataSource<AdminPurchasesItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
+        // case 'name': return compare(a.name, b.name, isAsc);
+        // case 'id': return compare(+a.id, +b.id, isAsc);
         default: return 0;
       }
     });

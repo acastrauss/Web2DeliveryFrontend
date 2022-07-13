@@ -25,14 +25,15 @@ export class DeliverersTableComponent implements AfterViewInit {
   ];
 
   constructor(
-    private _usersService : UsersService,
-    private cd: ChangeDetectorRef
+    private _usersService : UsersService
   ) {
     this.dataSource = new DeliverersTableDataSource();
 
     this._usersService.GetAllDeliverers().subscribe((delivs) => {
       console.log(delivs);
+
       delivs.forEach((d : any) => {
+
         let item:DeliverersTableItem = new DeliverersTableItem();
         item.address = d.address;
         item.dateOfBirth = d.dateOfBirth;

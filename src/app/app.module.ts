@@ -34,6 +34,7 @@ import { DelivererViewComponent } from './deliverer-view/deliverer-view.componen
 import { PurchaserViewComponent } from './purchaser-view/purchaser-view.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { AdminPurchasesComponent } from './admin-purchases/admin-purchases.component';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AdminPurchasesComponent } from './admin-purchases/admin-purchases.compo
     DelivererViewComponent,
     PurchaserViewComponent,
     ProductFormComponent,
-    AdminPurchasesComponent
+    AdminPurchasesComponent,
+    ProfileFormComponent
   ],
   imports: [
     BrowserModule,

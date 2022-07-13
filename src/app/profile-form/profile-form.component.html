@@ -1,0 +1,47 @@
+<form class="example-form" [formGroup]="ProfileForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="Username" type="text" formControlName="Username">
+  </mat-form-field>
+  <br/>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Email" type="email" formControlName="Email">
+  </mat-form-field>
+  <br/>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="Password" type="password" formControlName="Password">
+  </mat-form-field>
+  <br/>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>First Name</mat-label>
+    <input matInput placeholder="First Name" type="text" formControlName="FirstName">
+  </mat-form-field>
+  <br/>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Last Name</mat-label>
+    <input matInput placeholder="Last Name" type="text" formControlName="LastName">
+  </mat-form-field>
+  <br/>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Address</mat-label>
+    <input matInput placeholder="Address" type="text" formControlName="Address">
+  </mat-form-field>
+  <br/>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <!-- <mat-label>Profile Picture</mat-label> -->
+    <input placeholder="Profile Picture" type="file" formControlName="Picture">
+    <input matInput hidden>
+  </mat-form-field>
+  <br/>
+
+  <button mat-raised-button color="accent" type="submit" [disabled]="!ProfileForm.valid">Save</button>
+</form>
