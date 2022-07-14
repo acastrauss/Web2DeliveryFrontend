@@ -8,7 +8,7 @@ import { FormsContainerComponent } from './forms-container/forms-container.compo
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -35,6 +35,7 @@ import { PurchaserViewComponent } from './purchaser-view/purchaser-view.componen
 import { ProductFormComponent } from './product-form/product-form.component';
 import { AdminPurchasesComponent } from './admin-purchases/admin-purchases.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
+import { ProductsTableComponent } from './products-table/products-table.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
     PurchaserViewComponent,
     ProductFormComponent,
     AdminPurchasesComponent,
-    ProfileFormComponent
+    ProfileFormComponent,
+    ProductsTableComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -56,4 +56,17 @@ export class FormsService {
       }
     );
   }
+
+  UpdateUser(user: any){
+    var h = new HttpHeaders();
+    h.append("Content-Type", "application/json");
+
+    return this.http.put(
+      this.RegisterURL,
+      user,
+      {
+        headers : h
+      }
+    );
+  }
 }
