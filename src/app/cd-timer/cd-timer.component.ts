@@ -55,7 +55,10 @@ export class CdTimerComponent implements OnInit {
     if(this.hoursToDday <= 0) this.hoursToDday = 0;
     if(this.daysToDday <= 0) this.daysToDday = 0;
 
-    if(!this.finished && this.secondsToDday <= 0 && this.purchaseStatus == 'ACCEPTED'){
+    if(
+      !this.finished && this.secondsToDday <= 0 && this.minutesToDday <= 0 &&
+      this.hoursToDday <= 0 && this.daysToDday <= 0
+      && this.purchaseStatus == 'ACCEPTED'){
       this.finished = true;
       this._purchaseService.FinishPurchase(this.purchaseId).subscribe((x) => {
         console.log(x);

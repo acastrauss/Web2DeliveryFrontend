@@ -36,7 +36,7 @@
       <td mat-cell *matCellDef="let row">
       <div *ngIf="row.status == 'ACCEPTED'; else elseBlock">
         <!-- <div *ngIf="true; else elseBlock"> -->
-        <app-cd-timer [dDayStr]="GetDate(row)" [purchaseId]="row.id" [purchaseStatus]="row.stats"></app-cd-timer>
+        <app-cd-timer [dDayStr]="GetDate(row)" [purchaseId]="row.id" [purchaseStatus]="row.status"></app-cd-timer>
       </div>
       <ng-template #elseBlock>{{row.timeToDelivery}}</ng-template>
 
@@ -60,7 +60,7 @@
       [length]="dataSource?.data?.length"
       [pageIndex]="0"
       [pageSize]="10"
-      [pageSizeOptions]="[5, 10, 20]"
+      [pageSizeOptions]="[5, 10]"
       aria-label="Select page">
   </mat-paginator>
 </div>

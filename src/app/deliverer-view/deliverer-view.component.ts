@@ -1,33 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { UsersService } from '../services/users.service';
+import { interval } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-deliverer-view',
   templateUrl: './deliverer-view.component.html',
   styleUrls: ['./deliverer-view.component.scss']
 })
-export class DelivererViewComponent {
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      }
+export class DelivererViewComponent implements OnInit {
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
+  private intervalLogout:any;
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private _usersService: UsersService,
+    private router : Router
+  ) {}
+
+  ngOnInit(): void {
+    this.intervalLogout = setInterval(() => {
+      let userId = JSON.parse(sessionStorage.getItem('user')!).id;
+      this._usersService.CheckDelivererApproved(userId).subscribe((x) => {
+        if(!x){
+          sessionStorage.removeItem("token");
+          sessionStorage.removeItem("user");
+          this.router.navigate(['/forms']);
+        }
+      });
+    }, 1000);
+  }
 }

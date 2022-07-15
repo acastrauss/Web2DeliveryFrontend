@@ -36,4 +36,18 @@ export class UsersService {
       params:p
     });
   }
+
+  public CheckDelivererApproved(id:number){
+    let p = new HttpParams();
+    p = p.append("id", id);
+    return this.http.get(this.DeliverersURL + `/${id}`
+    );
+  }
+
+  public SavePicture(formData: FormData){
+    return this.http.post(
+      this.UsersURL + '/AddImage',
+      formData
+    );
+  }
 }

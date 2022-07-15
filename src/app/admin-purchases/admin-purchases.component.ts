@@ -132,7 +132,6 @@ export class AdminPurchasesComponent implements AfterViewInit, OnInit {
         }
       }
       else if (this.tableType == 4){
-        console.log(p);
         if(p.deliveredBy == userId){
           newPurchs.push(p);
         }
@@ -154,6 +153,7 @@ export class AdminPurchasesComponent implements AfterViewInit, OnInit {
   }
 
   UpdatePurchases(purchases: any[]){
+    purchases = purchases.reverse();
     this.myPurchases = purchases;
 
     switch (this.tableType) {

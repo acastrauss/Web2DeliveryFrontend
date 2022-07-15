@@ -4,6 +4,7 @@ import { FormsService } from '../services/forms.service';
 import * as CryptoJS from 'crypto-js';
 import { IUser } from '../models/user.model';
 import { Router } from '@angular/router';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-login-form',
@@ -19,7 +20,8 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     private _formsService: FormsService,
-    private router : Router
+    private router : Router,
+    private _userService: UsersService
   ) { }
 
   ngOnInit(): void {}
@@ -31,15 +33,36 @@ export class LoginFormComponent implements OnInit {
 
     this._formsService.Login(body).subscribe(
       (user: any) => { // 200 OK
-        alert("Logged in");
-        sessionStorage.setItem("token", user.token);
-        sessionStorage.setItem("user", JSON.stringify(user));
-        this.router.navigate(["/dashboard"]);
+        console.log(user);
+        if(user.uType == 1){ // deliverer
+          // check if approved
+          this._userService.CheckDelivererApproved(user.id).subscribe((x) => {
+            console.log(x);
+            if(x){
+              this.SuccesfullLogin(user);
+            }
+            else {
+              alert("Your account is not approved.");
+            }
+          })
+        }
+        else {
+          this.SuccesfullLogin(user);
+        }
     },
     (error: any) => {
       this.LoginForm.reset();
       alert("Wrong credentialns");
     });
+  }
+
+  SuccesfullLogin(user:any){
+    alert("Logged in");
+
+    sessionStorage.setItem("token", user.token);
+    sessionStorage.setItem("user", JSON.stringify(user));
+
+    this.router.navigate(["/dashboard"]);
   }
 
 }

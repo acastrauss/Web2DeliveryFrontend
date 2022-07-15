@@ -4,6 +4,7 @@ import { FormsService } from '../services/forms.service';
 import * as CryptoJS from 'crypto-js';
 import { IUser } from '../models/user.model';
 import { Router } from '@angular/router';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-register-form',
@@ -43,9 +44,12 @@ export class RegisterFormComponent implements OnInit {
     UType: new FormControl('')
   })
 
+  private pictureFile!: File;
+
   constructor(
     private _formsService: FormsService,
-    private router : Router
+    private router : Router,
+    private _userService: UsersService
 
   ) { }
 
@@ -57,19 +61,37 @@ export class RegisterFormComponent implements OnInit {
     const plainPass: string = this.RegisterForm.get("Password")?.value;
     let body = {...this.RegisterForm.value};
     body["Password"] = CryptoJS.SHA256(plainPass).toString();
-    this._formsService.Register(body).subscribe(
-      (user: any) => {
-        this.RegisterForm.reset();
-        alert("Registered");
-        this.router.navigate(['/loginform']);
+
+    if(!this.pictureFile) return;
+    const formData = new FormData();
+    formData.append("thumbnail", this.pictureFile);
+    this._userService.SavePicture(formData).subscribe((path) => {
+      body.PicturePath = path;
+      console.log(body);
+
+      this._formsService.Register(body).subscribe(
+        (user: any) => {
+          this.RegisterForm.reset();
+          alert("Registered");
+          this.router.navigate(['/loginform']);
+      },
+      (error: any) => {
+        alert("error");
+      }
+      );
     },
-    (error: any) => {
-      alert("error");
-    }
-    );
+    (error) => {
+      console.log(error);
+    })
+
+
   }
 
   SamePasswords():boolean{
     return this.RegisterForm.get("Password") == this.RegisterForm.get("PasswordConfirm");
+  }
+
+  onImageUploaded(event:any){
+    this.pictureFile = event.target.files[0];
   }
 }

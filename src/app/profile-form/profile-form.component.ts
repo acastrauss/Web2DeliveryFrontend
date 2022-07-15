@@ -4,6 +4,7 @@ import { IUser } from '../models/user.model';
 import { FormsService } from '../services/forms.service';
 import * as CryptoJS from 'crypto-js';
 import { Router } from '@angular/router';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-profile-form',
@@ -35,9 +36,12 @@ export class ProfileFormComponent implements OnInit {
 
   public currentUser!: IUser;
 
+  private pictureFile!: File;
+
   constructor(
     private _formsService: FormsService,
-    private router : Router
+    private router : Router,
+    private _userService: UsersService
   ) { }
 
   ngOnInit(): void {
@@ -59,17 +63,44 @@ export class ProfileFormComponent implements OnInit {
     let user = JSON.parse(sessionStorage.getItem("user")!);
     body.Id = user.id;
 
-    this._formsService.UpdateUser(body).subscribe((u : any) => {
-      u.token = user.token;
-      u.uType = u.userType;
-      sessionStorage.setItem("user", JSON.stringify(u));
-      console.log(sessionStorage.getItem("user"));
-      // window.location.reload();
-      alert("saved");
-      this.router.navigate(['/dashboard']);
-    }, (error:any) => {
-      console.log('error on update');
-    })
+    if(!this.pictureFile){
+      body.PicturePath = "";
+      this._formsService.UpdateUser(body).subscribe((u : any) => {
+        u.token = user.token;
+        u.uType = u.userType;
+        sessionStorage.setItem("user", JSON.stringify(u));
+        console.log(sessionStorage.getItem("user"));
+        // window.location.reload();
+        alert("saved");
+        this.router.navigate(['/dashboard']);
+      }, (error:any) => {
+        console.log('error on update');
+      })
+    }
+    else {
+      const formData = new FormData();
+      formData.append("thumbnail", this.pictureFile);
+      this._userService.SavePicture(formData).subscribe((p) => {
+        body.PicturePath = p;
+        this._formsService.UpdateUser(body).subscribe((u : any) => {
+          u.token = user.token;
+          u.uType = u.userType;
+          sessionStorage.setItem("user", JSON.stringify(u));
+          console.log(sessionStorage.getItem("user"));
+          // window.location.reload();
+          alert("saved");
+          this.router.navigate(['/dashboard']);
+        }, (error:any) => {
+          console.log('error on update');
+        })
+      });
+    }
+
+
+  }
+
+  onImageUploaded(event : any){
+    this.pictureFile = event.target.files[0];
   }
 
 }

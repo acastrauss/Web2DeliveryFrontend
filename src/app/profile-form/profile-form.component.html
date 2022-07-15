@@ -38,7 +38,7 @@
 
   <mat-form-field class="example-full-width" appearance="fill">
     <!-- <mat-label>Profile Picture</mat-label> -->
-    <input placeholder="Profile Picture" type="file" formControlName="Picture">
+    <input placeholder="Profile Picture" type="file" formControlName="Picture" #fileUpload (change)="onImageUploaded($event)" accept=".jpeg,.png,.jpg">
     <input matInput hidden>
   </mat-form-field>
   <br/>
