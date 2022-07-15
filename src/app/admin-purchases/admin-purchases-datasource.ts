@@ -6,6 +6,16 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 import { Product } from '../models/product.model';
 import { DELIVERY_PRICE, PurhaseStatus } from '../models/purchase.model';
 
+export class TimeToDelivery{
+  public days:number = 0;
+  public hours:number = 0;
+  public minutes:number = 0;
+  public seconds:number = 0;
+  public toString = () : string => {
+    return `${this.days}:${this.hours}:${this.minutes}:${this.seconds}`;
+  }
+}
+
 // TODO: Replace this with your own data model type
 export class AdminPurchasesItem {
   public totalPrice: number = DELIVERY_PRICE;
@@ -14,10 +24,9 @@ export class AdminPurchasesItem {
   public id: number = -1;
   public status: string = "";
   public products: Product[] = [];
+  public timeToDelivery: TimeToDelivery|string = new TimeToDelivery();
+  public deliveredAt: Date = new Date();
 }
-
-// TODO: replace this with real data from your application
-const EXAMPLE_DATA: AdminPurchasesItem[] = [];
 
 /**
  * Data source for the AdminPurchases view. This class should

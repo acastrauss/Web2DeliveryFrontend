@@ -21,13 +21,6 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
       <td mat-cell *matCellDef="let row">{{row.status}}</td>
     </ng-container>
-<!--
-    <ng-container matColumnDef="btn_products">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Products</th>
-      <td mat-cell *matCellDef="let row">
-        <button mat-raised-button color="accent" type="button" (click)="ShowProds()">Show products</button>
-      </td>
-    </ng-container> -->
 
     <ng-container matColumnDef="products">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Products</th>
@@ -38,11 +31,28 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="timeToDelivery">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Time to delivery</th>
+      <td mat-cell *matCellDef="let row">
+      <div *ngIf="row.status == 'ACCEPTED'; else elseBlock">
+        <!-- <div *ngIf="true; else elseBlock"> -->
+        <app-cd-timer [dDayStr]="GetDate(row)" [purchaseId]="row.id" [purchaseStatus]="row.stats"></app-cd-timer>
+      </div>
+      <ng-template #elseBlock>{{row.timeToDelivery}}</ng-template>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acceptPurchase" *ngIf="tableType==3">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Accept</th>
+      <td mat-cell *matCellDef="let row">
+          <button mat-raised-button color="accent" type="submit" (click)="OnAcceptPurchaser(row)">Accept</button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"
     ></tr>
-
-
 
   </table>
 
@@ -54,3 +64,4 @@
       aria-label="Select page">
   </mat-paginator>
 </div>
+

@@ -24,11 +24,11 @@
       </mat-card>
     </mat-grid-tile>
 
-    <mat-grid-tile [colspan]="2" [rowspan]="1" #purchaser_purchases id="purchaser_purchases">
+    <mat-grid-tile [colspan]="2" [rowspan]="2" #purchaser_purchases id="purchaser_purchases">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            Previous purchases
+            My purchases
             <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
               <mat-icon>more_vert</mat-icon>
             </button>
@@ -40,7 +40,7 @@
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
 
-          <div>Card Content Here</div>
+          <app-admin-purchases [tableType]="1"></app-admin-purchases>
 
         </mat-card-content>
       </mat-card>

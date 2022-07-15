@@ -35,4 +35,37 @@ export class PurchasesService {
       }
     );
   }
+
+  AcceptPurchase(purchaseId:number, delivererId: number){
+    const body = {
+      purchaseId: purchaseId,
+      delivererId: delivererId
+    };
+    var h = new HttpHeaders();
+    h.append("Content-Type", "application/json");
+
+    return this.http.post(
+      this.PurchasesAllURL + '/AcceptPurchase',
+      body,
+      {
+        headers : h
+      }
+    );
+  }
+
+  FinishPurchase(purchaseId: number){
+    const body = {
+      purchaseId: purchaseId
+    };
+    var h = new HttpHeaders();
+    h.append("Content-Type", "application/json");
+
+    return this.http.post(
+      this.PurchasesAllURL + '/FinishPurchase',
+      body,
+      {
+        headers : h
+      }
+    );
+  }
 }

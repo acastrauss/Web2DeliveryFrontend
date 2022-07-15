@@ -36,6 +36,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { AdminPurchasesComponent } from './admin-purchases/admin-purchases.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
 import { ProductsTableComponent } from './products-table/products-table.component';
+import { CdTimerComponent } from './cd-timer/cd-timer.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ProductsTableComponent } from './products-table/products-table.componen
     ProductFormComponent,
     AdminPurchasesComponent,
     ProfileFormComponent,
-    ProductsTableComponent
+    ProductsTableComponent,
+    CdTimerComponent
   ],
   imports: [
     BrowserModule,
