@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
+import { PurchasesCountService } from '../purchases-count.service';
 import { PurchasesService } from '../services/purchases.service';
 
 @Component({
@@ -34,14 +35,21 @@ export class CdTimerComponent implements OnInit {
   public daysToDday!:number;
 
   constructor(
-    private _purchaseService: PurchasesService
+    private _purchaseService: PurchasesService,
+    private _purchasesCountService: PurchasesCountService
   ){
+    _purchasesCountService.PurchaseNum.subscribe((x) => {
+      this.currentPurchNum = x;
+      console.log(this.currentPurchNum);
+    })
   }
 
   private getTimeDifference () {
       this.timeDifference = this.dDay.getTime() - new  Date().getTime();
       this.allocateTimeUnits(this.timeDifference);
   }
+
+  private currentPurchNum: number = 0;
 
   private allocateTimeUnits (timeDifference : any) {
     this.secondsToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute);
@@ -61,7 +69,11 @@ export class CdTimerComponent implements OnInit {
       && this.purchaseStatus == 'ACCEPTED'){
       this.finished = true;
       this._purchaseService.FinishPurchase(this.purchaseId).subscribe((x) => {
-        console.log(x);
+        console.log(JSON.parse(sessionStorage.getItem("user")!));
+        let userType = JSON.parse(sessionStorage.getItem("user")!).uType;
+        if(userType == 1){
+          this._purchasesCountService.PurchaseNum.next(this.currentPurchNum - 1);
+        }
       },
       (err) => {console.log(err);});
     }

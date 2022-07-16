@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { PurhaseStatus } from '../models/purchase.model';
+import { PurchasesCountService } from '../purchases-count.service';
 import { PurchasesService } from '../services/purchases.service';
 import { AdminPurchasesDataSource, AdminPurchasesItem, TimeToDelivery } from './admin-purchases-datasource';
 
@@ -36,9 +37,16 @@ export class AdminPurchasesComponent implements AfterViewInit, OnInit {
   public myPurchases: any[] = [];
 
   constructor(
-    private _purchasesService: PurchasesService
+    private _purchasesService: PurchasesService,
+    private _purchasesCountService: PurchasesCountService
+
   ) {
+    this._purchasesCountService.PurchaseNum.subscribe((x) => {
+      this.showOrderBtn = true;
+    })
   }
+
+  public showOrderBtn = true;
 
   ngOnInit(): void {
 
@@ -124,7 +132,6 @@ export class AdminPurchasesComponent implements AfterViewInit, OnInit {
   UpdateForUser(purchases: any[]){
     let newPurchs:any[] = [];
     let userId = JSON.parse(sessionStorage.getItem('user')!).id;
-
     purchases.forEach(p => {
       if(this.tableType == 1){
         if(p.orderedBy == userId){
@@ -134,6 +141,8 @@ export class AdminPurchasesComponent implements AfterViewInit, OnInit {
       else if (this.tableType == 4){
         if(p.deliveredBy == userId){
           newPurchs.push(p);
+          console.log(p.status);
+
         }
       }
     });
@@ -183,11 +192,13 @@ export class AdminPurchasesComponent implements AfterViewInit, OnInit {
   }
 
   OnAcceptPurchaser(row:any){
-    console.log(row);
+
     let purchaseId = row.id;
     let userId = JSON.parse(sessionStorage.getItem("user")!).id;
     this._purchasesService.AcceptPurchase(purchaseId, userId).subscribe((p) => {
       console.log(p);
+      this.showOrderBtn = false;
+
     },
     (error:any) => console.log(error)
     );

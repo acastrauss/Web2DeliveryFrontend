@@ -26,6 +26,7 @@ export class DelivererNavigationComponent {
   public logout(){
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
+    sessionStorage.clear();
     this.router.navigate(['/forms']);
   }
 }

@@ -21,6 +21,7 @@ export class DelivererViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.intervalLogout = setInterval(() => {
+      console.log('aaaaaaaaaaaaaaaaaaa');
       let userId = JSON.parse(sessionStorage.getItem('user')!).id;
       this._usersService.CheckDelivererApproved(userId).subscribe((x) => {
         if(!x){
