@@ -41,6 +41,7 @@ import { SocialNetworkComponent } from './social-network/social-network.componen
 
 import { MsalModule } from '@azure/msal-angular';
 import { PublicClientApplication } from '@azure/msal-browser';
+import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -64,7 +65,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ProfileFormComponent,
     ProductsTableComponent,
     CdTimerComponent,
-    SocialNetworkComponent
+    SocialNetworkComponent,
+    ProfilePictureComponent
   ],
   imports: [
     BrowserModule,

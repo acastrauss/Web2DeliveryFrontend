@@ -22,7 +22,9 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Delivery</span>
+      <span>
+        <app-profile-picture></app-profile-picture>
+      </span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <app-admin-view></app-admin-view>
