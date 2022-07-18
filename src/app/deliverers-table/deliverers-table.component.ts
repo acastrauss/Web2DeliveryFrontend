@@ -6,6 +6,7 @@ import { MatTable } from '@angular/material/table';
 import { Deliverer } from '../models/user.model';
 import { UsersService } from '../services/users.service';
 import { DeliverersTableDataSource, DeliverersTableItem } from './deliverers-table-datasource';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-deliverers-table',
@@ -27,6 +28,7 @@ export class DeliverersTableComponent implements AfterViewInit {
   constructor(
     private _usersService : UsersService
   ) {
+
     this.dataSource = new DeliverersTableDataSource();
 
     this._usersService.GetAllDeliverers().subscribe((delivs) => {
@@ -58,10 +60,12 @@ export class DeliverersTableComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+
   }
 
   OnChangeStatus(id:number, status:number){
-    let adminId: number = JSON.parse(sessionStorage.getItem("user")!).id;
+    let adminId = jwt_decode(sessionStorage.getItem("token")!)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid'];
+    // let adminId: number = JSON.parse(sessionStorage.getItem("user")!).id;
     this._usersService.ChangeDelivererStatus(id, status, adminId).subscribe((x:any) => {
       window.location.reload();
     },

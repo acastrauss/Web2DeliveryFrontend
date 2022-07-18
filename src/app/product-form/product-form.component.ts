@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsService } from '../services/forms.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-product-form',
@@ -17,7 +18,11 @@ export class ProductFormComponent implements OnInit {
 
   constructor(
     private _formsService: FormsService
-  ) { }
+  ) {
+    let obj: object = jwt_decode(sessionStorage.getItem("token")!);
+    console.log(obj);
+    console.log(obj['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid']);
+  }
 
   ngOnInit(): void {
   }
@@ -26,7 +31,7 @@ export class ProductFormComponent implements OnInit {
     let body =
     {
       product : this.ProductForm.value,
-      adminId : JSON.parse(sessionStorage.getItem("user")!).id
+      adminId : jwt_decode(sessionStorage.getItem("token")!)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid']
     };
 
 

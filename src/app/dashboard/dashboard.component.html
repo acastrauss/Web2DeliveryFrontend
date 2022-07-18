@@ -1,7 +1,7 @@
 
 <div [ngSwitch]="GetUserType()">
-  <app-admin-navigation *ngSwitchCase="0">...</app-admin-navigation>
-  <app-deliverer-navigation *ngSwitchCase="1"></app-deliverer-navigation>
-  <app-purchaser-navigation *ngSwitchCase="2"></app-purchaser-navigation>
+  <app-admin-navigation *ngSwitchCase="'admin'">...</app-admin-navigation>
+  <app-deliverer-navigation *ngSwitchCase="'deliverer'"></app-deliverer-navigation>
+  <app-purchaser-navigation *ngSwitchCase="'purchaser'"></app-purchaser-navigation>
   <p *ngSwitchDefault>ERROR</p>
 </div>

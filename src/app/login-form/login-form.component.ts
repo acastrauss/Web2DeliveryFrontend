@@ -5,6 +5,7 @@ import * as CryptoJS from 'crypto-js';
 import { IUser } from '../models/user.model';
 import { Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login-form',
@@ -58,7 +59,6 @@ export class LoginFormComponent implements OnInit {
 
   SuccesfullLogin(user:any){
     alert("Logged in");
-
     sessionStorage.setItem("token", user.token);
     sessionStorage.setItem("user", JSON.stringify(user));
 

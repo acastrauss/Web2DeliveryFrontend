@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,8 @@ export class DashboardComponent implements OnInit {
   }
 
   GetUserType(){
-    return JSON.parse(sessionStorage.getItem('user')!).uType;
+    return jwt_decode(sessionStorage.getItem("token")!)['role'];
+    // return JSON.parse(sessionStorage.getItem('user')!).uType;
   }
 
 }

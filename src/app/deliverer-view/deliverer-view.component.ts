@@ -4,6 +4,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { UsersService } from '../services/users.service';
 import { interval } from 'rxjs';
 import { Router } from '@angular/router';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-deliverer-view',
@@ -21,8 +22,8 @@ export class DelivererViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.intervalLogout = setInterval(() => {
-      console.log('aaaaaaaaaaaaaaaaaaa');
-      let userId = JSON.parse(sessionStorage.getItem('user')!).id;
+      let userId = jwt_decode(sessionStorage.getItem("token")!)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid'];
+      // let userId = JSON.parse(sessionStorage.getItem('user')!).id;
       this._usersService.CheckDelivererApproved(userId).subscribe((x) => {
         if(!x){
           sessionStorage.removeItem("token");

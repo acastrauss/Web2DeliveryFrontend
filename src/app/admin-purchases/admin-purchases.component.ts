@@ -8,6 +8,7 @@ import { PurhaseStatus } from '../models/purchase.model';
 import { PurchasesCountService } from '../purchases-count.service';
 import { PurchasesService } from '../services/purchases.service';
 import { AdminPurchasesDataSource, AdminPurchasesItem, TimeToDelivery } from './admin-purchases-datasource';
+import jwt_decode from 'jwt-decode';
 
 
 @Component({
@@ -131,7 +132,8 @@ export class AdminPurchasesComponent implements AfterViewInit, OnInit {
 
   UpdateForUser(purchases: any[]){
     let newPurchs:any[] = [];
-    let userId = JSON.parse(sessionStorage.getItem('user')!).id;
+    let userId = jwt_decode(sessionStorage.getItem("token")!)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid'];
+    // let userId = JSON.parse(sessionStorage.getItem('user')!).id;
     purchases.forEach(p => {
       if(this.tableType == 1){
         if(p.orderedBy == userId){
@@ -194,7 +196,8 @@ export class AdminPurchasesComponent implements AfterViewInit, OnInit {
   OnAcceptPurchaser(row:any){
 
     let purchaseId = row.id;
-    let userId = JSON.parse(sessionStorage.getItem("user")!).id;
+    let userId = jwt_decode(sessionStorage.getItem("token")!)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid'];
+    // let userId = JSON.parse(sessionStorage.getItem("user")!).id;
     this._purchasesService.AcceptPurchase(purchaseId, userId).subscribe((p) => {
       console.log(p);
       this.showOrderBtn = false;

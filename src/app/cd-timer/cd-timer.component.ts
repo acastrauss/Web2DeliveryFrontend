@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@
 import { Subscription, interval } from 'rxjs';
 import { PurchasesCountService } from '../purchases-count.service';
 import { PurchasesService } from '../services/purchases.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-cd-timer',
@@ -69,11 +70,12 @@ export class CdTimerComponent implements OnInit {
       && this.purchaseStatus == 'ACCEPTED'){
       this.finished = true;
       this._purchaseService.FinishPurchase(this.purchaseId).subscribe((x) => {
-        console.log(JSON.parse(sessionStorage.getItem("user")!));
-        let userType = JSON.parse(sessionStorage.getItem("user")!).uType;
-        if(userType == 1){
-          this._purchasesCountService.PurchaseNum.next(this.currentPurchNum - 1);
-        }
+      let userRole = jwt_decode(sessionStorage.getItem("token")!)['role'];
+
+      // let userType = JSON.parse(sessionStorage.getItem("user")!).uType;
+      if(userRole == 'admin'){
+        this._purchasesCountService.PurchaseNum.next(this.currentPurchNum - 1);
+      }
       },
       (err) => {console.log(err);});
     }

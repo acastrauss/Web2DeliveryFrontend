@@ -6,6 +6,7 @@ import { Product } from '../models/product.model';
 import { DELIVERY_TIME, Purchase, PurhaseStatus } from '../models/purchase.model';
 import { PurchasesService } from '../services/purchases.service';
 import { ProductsTableDataSource, ProductsTableItem } from './products-table-datasource';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-products-table',
@@ -50,7 +51,7 @@ export class ProductsTableComponent implements AfterViewInit {
   OnOrder(){
     let purch = new Purchase();
     purch.Comment = this.comment;
-    purch.Address = JSON.parse(sessionStorage.getItem("user")!).address;
+    purch.Address = jwt_decode(sessionStorage.getItem("token")!)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/streetaddress'];
     purch.Status = PurhaseStatus.ORDERED;
     purch.TotalPrice = purch.DeliveryPrice;
     let tempDate = new Date();
@@ -71,7 +72,7 @@ export class ProductsTableComponent implements AfterViewInit {
 
     const body = {
       purchase: purch,
-      deliveredTo : JSON.parse(sessionStorage.getItem("user")!).id,
+      deliveredTo : jwt_decode(sessionStorage.getItem("token")!)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid'],
       deliveredBy: null
     }
 
