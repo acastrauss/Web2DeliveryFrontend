@@ -67,12 +67,13 @@ export class ProfileFormComponent implements OnInit {
       body.PicturePath = "";
       this._formsService.UpdateUser(body).subscribe((u : any) => {
         u.token = user.token;
-        u.uType = u.userType;
+        // u.uType = u.userType;
         sessionStorage.setItem("user", JSON.stringify(u));
+        console.log(u);
         console.log(sessionStorage.getItem("user"));
         // window.location.reload();
         alert("saved");
-        this.router.navigate(['/dashboard']);
+        window.location.reload();
       }, (error:any) => {
         console.log('error on update');
       })
@@ -84,12 +85,13 @@ export class ProfileFormComponent implements OnInit {
         body.PicturePath = p;
         this._formsService.UpdateUser(body).subscribe((u : any) => {
           u.token = user.token;
-          u.uType = u.userType;
+          // u.uType = u.userType;
           sessionStorage.setItem("user", JSON.stringify(u));
+          console.log(u);
           console.log(sessionStorage.getItem("user"));
           // window.location.reload();
           alert("saved");
-          this.router.navigate(['/dashboard']);
+          window.location.reload();
         }, (error:any) => {
           console.log('error on update');
         })
