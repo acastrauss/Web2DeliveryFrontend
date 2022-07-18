@@ -73,7 +73,9 @@ export class CdTimerComponent implements OnInit {
       let userRole = jwt_decode(sessionStorage.getItem("token")!)['role'];
 
       // let userType = JSON.parse(sessionStorage.getItem("user")!).uType;
-      if(userRole == 'admin'){
+      console.log('aaaaaaa');
+      console.log(userRole);
+      if(userRole == 'deliverer'){
         this._purchasesCountService.PurchaseNum.next(this.currentPurchNum - 1);
       }
       },

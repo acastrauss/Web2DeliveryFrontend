@@ -143,7 +143,6 @@ export class AdminPurchasesComponent implements AfterViewInit, OnInit {
       else if (this.tableType == 4){
         if(p.deliveredBy == userId){
           newPurchs.push(p);
-          console.log(p.status);
 
         }
       }
@@ -199,9 +198,7 @@ export class AdminPurchasesComponent implements AfterViewInit, OnInit {
     let userId = jwt_decode(sessionStorage.getItem("token")!)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid'];
     // let userId = JSON.parse(sessionStorage.getItem("user")!).id;
     this._purchasesService.AcceptPurchase(purchaseId, userId).subscribe((p) => {
-      console.log(p);
       this.showOrderBtn = false;
-
     },
     (error:any) => console.log(error)
     );
